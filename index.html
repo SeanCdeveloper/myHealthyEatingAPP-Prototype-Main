@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #inputSearch {
+            width: 75%;
+            height: 25px;
+            margin: 3% 0 5% 2%;
+            background: #d3d3d3;
+        }
+
+        label {
+            margin-left: 2%;
+        }
+
+        #inputBtn {
+            color: white;
+            background: black;
+            height: 2.5em;
+            width: 7em;
+        }
+
+        .introduction {
+            background: #000000;
+            color: white;
+            text-align: center;
+            font-size: 15pt;
+            margin: 5% 10% 0 10%;
+            height: 2em;
+        }
+
+        .inputElements {
+            border: 1px solid #d3d3d3;
+            margin: 0% 10% 5% 10%;
+            background: linear-gradient(white, orange);
+        }
+
+        .srchResultHead {
+            background: #000000;
+            color: white;
+            text-align: center;
+            font-size: 15pt;
+            margin: 0 0 0 0;
+            height: 2em;
+        }
+
+        .searchResultWrap {
+            margin: 0 10% 0 10%;
+        }
+
+        .resultsDisplayDiv {
+            margin: 0 0 0 0;
+            background: linear-gradient(white, orange);
+        }
+
+        body {
+            /*
+            background-image: url("");
+            */
+            background: radial-gradient(orange, black);
+        }
+
+        .myWorkoutWrap {
+            margin: 0 10% 0 10%;
+        }
+
+        .myWorkoutHeader {
+            background: #000000;
+            color: white;
+            text-align: center;
+            font-size: 15pt;
+            margin: 5% 0 0 0;
+            height: 2em;
+        }
+
+        .myWorkoutDiv {
+            margin: 0 10% 0 10%;
+            background: linear-gradient(white, orange);
+            height: 5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!--Introduction Area -->
+        <div class="introduction">
+            myHealthyEating APP
+        </div>
+
+        <!--Input Elements-->
+        <div class="inputElements">
+            <!--Input Area-->
+            <label for="inputSearch">What Ingredients Do You Want To Include?</label><br>
+            <input type="text" id="inputSearch" placeholder="Ingredient List" />
+
+            <!--Submit Button-->
+            <input type="submit" id="inputBtn" />
+        </div>
+
+        <!--Results Area-->
+        <div class="searchResultWrap">
+            <div class="srchResultHead">
+                myRecipeList
+            </div>
+            <div class="resultsDisplayDiv"></div>
+        </div>
+
+        <!--Workout Input Area-->
+        <div class="myWorkoutWrap">
+            <div class="myWorkoutHeader">
+                MyMealPlan
+            </div>
+        </div>
+    </div>
+    <div class=></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+        var inputItem;
+        $("#inputBtn").on("click", function (event) {
+            event.preventDefault();
+            /*
+            clearField();
+            */
+            console.log(event.target);
+            var inputItem = $("#inputSearch").val().trim().toLowerCase();
+            //console.log(inputItem);
+            Ajax();
+        });
+
+        function Ajax() {
+            var inputItem = $("#inputSearch").val().trim().toLowerCase();
+            console.log(inputItem);
+            var ingredientDomainName = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=";
+            var queryUrl = ingredientDomainName + inputItem + "instructionsRequired=true" + "&number=10";
+            var apiKey = "38c2b222ce264310b8004af5c17c9d5a";
+            $.ajax({
+                url: queryUrl + "&apiKey=" + apiKey,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                for (var i = 0; ; i++) {
+                    console.log(response[i].title);
+                    /*
+                    var searchedIngredients = response[i].title.toLowerCase();
+                    var inputItem = $("#inputSearch").val().trim().toLowerCase();
+                    if (searchedIngredients === inputItem) {
+*/
+                    }
+       
+            });
+        }
+
+        function clearField() {
+            $("#results").empty();
+        }
+        $("#clear").on("click", clearField);
+
+/*
+            var wf = "";
+            wf += "<h2>" + response.city.name + " Five-Day Forecast" + "</h2>";
+                $.each(response.list, function (index, val) {
+                                wf += "<div class='five_day_div'"; // Opening paragraph tag
+                                wf += "<span>" + momentArr[index] + "</span>";
+                                wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>"; // Icon
+                                var Kelvin = val.main.temp;
+                                var Farenheit = Math.floor((Kelvin - 273.15) * 1.80 + 32);
+                                wf += "Temp: " + Farenheit + "&degF"; // Temperature
+                                wf += "<span> | " + val.weather[0].description + "</span>";
+                                wf += "<span> | Humidity: " + val.main.humidity + "% </span>";
+                                wf += "</div>"; // Closing paragraph Tag
+                                // Fix to showFiveDay
+                                $("#showWeatherForecast").html(wf);
+        */
+
+        /*
+        var terms = "";
+        var numberOfRecords;
+        var startYear;
+        var endYear;
+
+        $("#search").on("click", function(event) {
+          event.preventDefault();
+          clearField();
+          var apiKey = "ZY3AU5bXbrxSj8Ms4pcp46HRJaZGeWkl";
+          terms = $("#searchterms").val();
+          numberOfRecords = $("#numofrecords").val();
+          startYear = $("#startyear").val();
+          endYear = $("#endyear").val();
+          var queryURL =
+            "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=" +
+            terms +
+            "&facet_field=day_of_week&facet=true&begin_date=" +
+            startYear +
+            "0101&end_date=" +
+            endYear +
+            "0101&api-key=" +
+            apiKey;
+
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(response);
+            console.log(response.response);
+            var result = response.response.docs;
+            for (var i = 0; i < numberOfRecords; i++) {
+              var newDiv = $("<div>");
+              var head = $("<h4>");
+              head.text(result[i].headline.main);
+              var p = $("<p>");
+              var hr = $("<hr>");
+              p.text(result[i].abstract);
+              newDiv.append(head);
+              newDiv.append(p);
+              newDiv.append(hr);
+              $("#results").prepend(newDiv);
+            }
+          });
+        });
+        */
+
+        /*
+                $.ajax({
+                    url: fiveDayURL,
+                    method: "GET",
+                    data: {
+                        cnt: "5"
+                    }
+                }).then(function (response) {
+                    var wf = "";
+                    var d0 = moment().add(1, 'days').format("L");
+                    var d1 = moment().add(2, 'days').format("L");
+                    var d2 = moment().add(3, 'days').format("L");
+                    var d3 = moment().add(4, 'days').format("L");
+                    var d4 = moment().add(5, 'days').format("L");
+
+                    var momentArr = [d0, d1, d2, d3, d4];
+
+                    wf += "<h2>" + response.city.name + " Five-Day Forecast" + "</h2>";
+                    $.each(response.list, function (index, val) {
+                        wf += "<div class='five_day_div'"; // Opening paragraph tag
+                        wf += "<span>" + momentArr[index] + "</span>";
+                        wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>"; // Icon
+                        var Kelvin = val.main.temp;
+                        var Farenheit = Math.floor((Kelvin - 273.15) * 1.80 + 32);
+                        wf += "Temp: " + Farenheit + "&degF"; // Temperature
+                        wf += "<span> | " + val.weather[0].description + "</span>";
+                        wf += "<span> | Humidity: " + val.main.humidity + "% </span>";
+                        wf += "</div>"; // Closing paragraph Tag
+                        // Fix to showFiveDay
+                        $("#showWeatherForecast").html(wf);
+                    });
+                });
+            }
+        */
+    </script>
+</body>
+</html>
