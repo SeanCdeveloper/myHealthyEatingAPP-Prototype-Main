@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>myHealthyEatingAPP-Prototype-Main/title>
+    <title>MyHealthyEatingAPP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -136,7 +136,7 @@
             searchedItems.unshift(inputItem);
             console.log(searchedItems);
             Ajax();
-            AJAX2();
+            //AJAX2();
         });
 
         function Ajax() {
@@ -165,7 +165,7 @@
                 }
             });
         }
- 
+ /*
         function AJAX2() {
             var mealPlanDomainName = "https://api.spoonacular.com/recipes/mealplans/generate";
             var mealPlanUrl = "https://api.spoonacular.com/recipes/mealplans/generate?timeFrame=day&diet=paleo";
@@ -178,7 +178,7 @@
                 console.log(response);
             });
         }
-
+*/
         function clearField() {
             $("#results").empty();
         }
