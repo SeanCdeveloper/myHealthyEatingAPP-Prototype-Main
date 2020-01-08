@@ -165,8 +165,16 @@
                 method: "GET"
             }).then(function(response) {
                 console.log(response);
+             //   for (i=0; ; i++)
+                console.log(response[0].steps[0]["step"]);
+                console.log(response[0].steps[1]["step"]);
+                console.log(response[0].steps[2]["step"]);
+                console.log(response[0].steps[3]["step"]);
             });
         }
+
+
+
 
         function clearField() {
             $("#results").empty();
