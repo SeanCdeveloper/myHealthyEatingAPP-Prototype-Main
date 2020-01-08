@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyHealthyEatingAPP-Prototype-Main</title>
+    <title>myHealthyEatingAPP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -90,7 +90,7 @@
     <div class="container">
         <!--Introduction Area -->
         <div class="introduction">
-   
+
         </div>
 
         <!--Input Elements-->
@@ -106,7 +106,7 @@
         <!--Results Area-->
         <div class="searchResultWrap">
             <div class="srchResultHead">
-        
+
             </div>
             <div class="resultsDisplayDiv"></div>
         </div>
@@ -121,6 +121,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
+
         var searchedItems = [];
 
         var inputItem;
@@ -135,16 +136,17 @@
             searchedItems.unshift(inputItem);
             console.log(searchedItems);
             Ajax();
-            AJAX2();
+            //AJAX2();
         });
 
         function Ajax() {
             var inputItem = $("#inputSearch").val().trim().toLowerCase();
             var ingredientDomainName = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=";
-            var queryUrl = ingredientDomainName + searchedItems[0] + "instructionsRequired=true" + "&number=5";
-            var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
-          
-      
+            var queryUrl = ingredientDomainName + searchedItems[0] + "&number=2";
+            //ingredientDomainName + searchedItems[0] + "instructionsRequired=true" + "&number=2";
+            //var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
+            var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
+
             $.ajax({
                 url: queryUrl + "&apiKey=" + apiKey,
                 method: "GET"
@@ -165,17 +167,13 @@
                 method: "GET"
             }).then(function(response) {
                 console.log(response);
-             //   for (i=0; ; i++)
                 console.log(response[0].steps[0]["step"]);
                 console.log(response[0].steps[1]["step"]);
                 console.log(response[0].steps[2]["step"]);
                 console.log(response[0].steps[3]["step"]);
             });
         }
-
-
-
-
+        
         function clearField() {
             $("#results").empty();
         }
