@@ -135,8 +135,8 @@
             //console.log(inputItem);
             searchedItems.unshift(inputItem);
             console.log(searchedItems);
-            Ajax();
-            //AJAX2();
+           // Ajax();
+            AJAX2();
         });
 
         function Ajax() {
@@ -157,20 +157,19 @@
                 }
             });
         }
- 
+
         function AJAX2() {            
             var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
-            var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
+            var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
+            /*var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";*/
 
             $.ajax({
                 url: recipeUrl + "&apiKey=" + apiKey,
                 method: "GET"
             }).then(function(response) {
-                console.log(response);
-                console.log(response[0].steps[0]["step"]);
-                console.log(response[0].steps[1]["step"]);
-                console.log(response[0].steps[2]["step"]);
-                console.log(response[0].steps[3]["step"]);
+                for (var i=0;; i++) {
+                    console.log(response[0].steps[i]["step"]);
+                }
             });
         }
         
@@ -182,6 +181,7 @@
 
 
 /*
+
             var wf = "";
             wf += "<h2>" + response.city.name + " Five-Day Forecast" + "</h2>";
                 $.each(response.list, function (index, val) {
