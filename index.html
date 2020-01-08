@@ -129,11 +129,8 @@
             /*
             clearField();
             */
-            console.log(event.target);
             var inputItem = $("#inputSearch").val().trim().toLowerCase();
-            //console.log(inputItem);
             searchedItems.unshift(inputItem);
-            console.log(searchedItems);
             Ajax();
             //AJAX2();
         });
@@ -154,8 +151,7 @@
                 console.log(response);
                 for (var i = 0; i<response.length; i++) {
                     var responseName = response[i].title;
-                    console.log(responseName);
-                    var newDiv = $("<div>");
+                    var newDiv = $("<div id='foodItemDiv'>");
                     var newP = $("<p>");
                     var hr = $("<hr>");
                     newP.text(responseName);
@@ -166,8 +162,6 @@
             });
         }
 
-
-/*
         function AJAX2() {            
             var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
             var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
@@ -181,7 +175,12 @@
                 }
             });
         }
-*/
+
+        $(document).on("click", "#foodItemDiv", change);
+
+        function change() {
+            $(this).css("background", "blue");
+        }
     </script>
 </body>
 </html>
