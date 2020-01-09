@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HealthyEatingAPP-Prototype-Main</title>
+    <title>Healthy Eating APP Practice 3</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -83,6 +83,10 @@
             background: linear-gradient(white, orange);
             height: 5em;
         }
+
+        #idDisp {
+            display: none;
+        }
     </style>
 </head>
 
@@ -157,7 +161,7 @@
                     searchedId.unshift(recipeId);
                     console.log(searchedId);
                     var responseName = response[i].title;
-                    var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span>" + recipeId + "</span>" + "</div>");
+                    var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span id='idDisp'>" + recipeId + "</span>" + "</div>");
                     console.log(newDiv);
                     var newP = $("<p>");
                     var hr = $("<hr>");
@@ -194,5 +198,4 @@
         }
     </script>
 </body>
-
 </html>
