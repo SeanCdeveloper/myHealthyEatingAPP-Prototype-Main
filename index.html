@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Healthy Eating APP-Prototype-Main</title>
+    <title>HealthyEatingAPP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -157,7 +157,7 @@
                     searchedId.unshift(recipeId);
                     console.log(searchedId);
                     var responseName = response[i].title;
-                    var newDiv = $("<div class='foodItemDiv'>" + "<span>" + recipeId + "</span>" + "</div>");
+                    var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span>" + recipeId + "</span>" + "</div>");
                     console.log(newDiv);
                     var newP = $("<p>");
                     var hr = $("<hr>");
@@ -169,6 +169,9 @@
             });
         }
 
+        /* Putting Data Attributes into "newDiv" statement:
+        "var newDiv = $("<div class='foodItemDiv'>" + "<span>" + recipeId + "</span>" + "</div>");" 
+        "var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span>" + recipeId + "</span>" + "</div>");"
         function AJAX2() {
             var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
             // var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
@@ -181,11 +184,12 @@
                 }
             });
         }
-
+*/
         $(document).on("click", ".foodItemDiv", showSteps);
 
         function showSteps() {
             $(this).css("background", "blue");
+            console.log($(this).text());
             //AJAX2();
         }
     </script>
