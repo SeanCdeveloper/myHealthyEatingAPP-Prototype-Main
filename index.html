@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Healthy Eating APP Practice 3</title>
+    <title>Healthy EatingAPP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -173,12 +173,16 @@
             });
         }
 
-        /* Putting Data Attributes into "newDiv" statement:
+        /* Putting Data Attributes into "newDiv" statement: 
         "var newDiv = $("<div class='foodItemDiv'>" + "<span>" + recipeId + "</span>" + "</div>");" 
         "var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span>" + recipeId + "</span>" + "</div>");"
+    */
+        var clickedId;
         function AJAX2() {
-            var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
-            // var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
+            var clickedId = $(this).attr("data-id");
+            console.log(clickedId);  // Displays undefined
+            var recipeUrl = "https://api.spoonacular.com/recipes/" + clickedId + "/analyzedInstructions?";
+            var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
             $.ajax({
                 url: recipeUrl + "&apiKey=" + apiKey,
                 method: "GET"
@@ -188,14 +192,16 @@
                 }
             });
         }
-*/
+
         $(document).on("click", ".foodItemDiv", showSteps);
 
         function showSteps() {
             $(this).css("background", "blue");
             console.log($(this).text());
             console.log($(this).attr("data-id"));
-            //AJAX2();
+            var clickedId = $(this).attr("data-id");
+            console.log(clickedId);
+            AJAX2();
         }
     </script>
 </body>
