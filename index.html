@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Healthy Eating APP Practice 3</title>
+    <title>Healthy Eating APP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -145,6 +145,8 @@
             var apiKey = "7884711d9e63490ba357787dbc3eb1fe";
             //var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
        
+            var searchedId = [];
+
             $.ajax({
                 url: queryUrl + "&apiKey=" + apiKey,
                 method: "GET"
@@ -153,18 +155,25 @@
                 for (var i = 0; i<response.length; i++) {
                     var recipeId = response[i].id;
                     console.log(recipeId);
+                    searchedId.unshift(recipeId);
+                    console.log(searchedId);
                     var responseName = response[i].title;
-                    var newDiv = $("<div id='foodItemDiv'>");
+                    var newDiv = $("<div class='foodItemDiv'><span></span></div>");
                     var newP = $("<p>");
                     var hr = $("<hr>");
                     newP.text(responseName);
                     newDiv.append(newP);
                     newDiv.append(hr);
-                    $(".resultsDisplayDiv").prepend(newDiv);  
+                    $(".resultsDisplayDiv").prepend(newDiv);
+                    $("#foodItemDiv").attr("id", function(arr) {
+                        return "div-id" + arr;
+                    }).each(function() {
+                        $("span", this).html("(id = '<b>" + this.id + "</b')");
+                    });
                 }
             });
         }
-
+ 
         function AJAX2() {            
             var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
            // var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
@@ -178,7 +187,7 @@
             });
         }
 
-        $(document).on("click", "#foodItemDiv", showSteps);
+        $(document).on("click", ".foodItemDiv", showSteps);
 
         function showSteps() {
             $(this).css("background", "blue");
