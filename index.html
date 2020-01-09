@@ -141,47 +141,42 @@
             var queryUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + searchedItems[0] + "&number=2";
             //ingredientDomainName + searchedItems[0] + "instructionsRequired=true" + "&number=2";
             //var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
-           //var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
+            //var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
             var apiKey = "7884711d9e63490ba357787dbc3eb1fe";
             //var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
-       
-            var searchedId = [];
 
+            var searchedId = [];
             $.ajax({
                 url: queryUrl + "&apiKey=" + apiKey,
                 method: "GET"
             }).then(function (response) {
                 console.log(response);
-                for (var i = 0; i<response.length; i++) {
+                for (var i = 0; i < response.length; i++) {
                     var recipeId = response[i].id;
                     console.log(recipeId);
                     searchedId.unshift(recipeId);
                     console.log(searchedId);
                     var responseName = response[i].title;
-                    var newDiv = $("<div class='foodItemDiv'><span></span></div>");
+                    var newDiv = $("<div class='foodItemDiv'>" + "<span>" + recipeId + "</span>" + "</div>");
+                    console.log(newDiv);
                     var newP = $("<p>");
                     var hr = $("<hr>");
                     newP.text(responseName);
                     newDiv.append(newP);
                     newDiv.append(hr);
                     $(".resultsDisplayDiv").prepend(newDiv);
-                    $("#foodItemDiv").attr("id", function(arr) {
-                        return "div-id" + arr;
-                    }).each(function() {
-                        $("span", this).html("(id = '<b>" + this.id + "</b')");
-                    });
                 }
             });
         }
- 
-        function AJAX2() {            
+
+        function AJAX2() {
             var recipeUrl = "https://api.spoonacular.com/recipes/1011446/analyzedInstructions?";
-           // var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
+            // var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
             $.ajax({
                 url: recipeUrl + "&apiKey=" + apiKey,
                 method: "GET"
-            }).then(function(response) {
-                for (var i=0;; i++) {
+            }).then(function (response) {
+                for (var i = 0; ; i++) {
                     console.log(response[0].steps[i]["step"]);
                 }
             });
@@ -195,4 +190,5 @@
         }
     </script>
 </body>
+
 </html>
