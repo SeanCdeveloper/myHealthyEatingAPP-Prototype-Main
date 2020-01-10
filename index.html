@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Healthy Eating APP Practice 3</title>
+    <title>Healthy EatingAPP-Prototype-Main</title>
     <style>
         #inputSearch {
             width: 75%;
@@ -142,7 +142,7 @@
         function Ajax() {
             var inputItem = $("#inputSearch").val().trim().toLowerCase();
             var ingredientDomainName = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=";
-            var queryUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + searchedItems[0] + "&number=2";
+            var queryUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + searchedItems[0] + "&number=5";
             //ingredientDomainName + searchedItems[0] + "instructionsRequired=true" + "&number=2";
             //var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
             //var apiKey = "a24fa84bbda24ba5a81304ccf4121858";
@@ -177,7 +177,18 @@
         "var newDiv = $("<div class='foodItemDiv'>" + "<span>" + recipeId + "</span>" + "</div>");" 
         "var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span>" + recipeId + "</span>" + "</div>");"
     */
-    
+
+        $(document).on("click", ".foodItemDiv", showSteps);
+
+        function showSteps() {
+            console.log($(this).text());
+            console.log($(this).attr("data-id"));
+            var clickedId = $(this).attr("data-id");
+            console.log(clickedId);
+            AJAX2(clickedId);
+            ingredientsAJAX(clickedId);
+        }
+
         function AJAX2(clickedId) {
             var recipeUrl = "https://api.spoonacular.com/recipes/" + clickedId + "/analyzedInstructions?";
             var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
@@ -191,28 +202,14 @@
             });
         }
 
-        $(document).on("click", ".foodItemDiv", showSteps);
-
-        function showSteps() {
-            console.log($(this).text());
-            console.log($(this).attr("data-id"));
-            var clickedId = $(this).attr("data-id");
-            console.log(clickedId);
-            AJAX2(clickedId);
-            ingredientsAJAX(clickedId);
-        }
-
         function ingredientsAJAX(clickedId) {
-            //var ingredientsUrl = "https://api.spoonacular.com/recipes/1003464/ingredientWidget.json?";
             var ingredientsUrl = "https://api.spoonacular.com/recipes/" + clickedId + "/ingredientWidget.json?";
             var apiKey = "7884711d9e63490ba357787dbc3eb1fe";
             $.ajax({
                 url: ingredientsUrl + "&apiKey=" + apiKey,
                 method: "GET"
             }).then(function (response) {
-                //console.log(response);
-                console.log(response.ingredients);
-                for (var i=0; i<response.ingredients.length; i++) {
+                for (var i = 0; i < response.ingredients.length; i++) {
                     var results = response.ingredients[i];
                     console.log(results.name);
                     console.log(results.amount.us.value);
@@ -222,4 +219,5 @@
         }
     </script>
 </body>
+
 </html>
