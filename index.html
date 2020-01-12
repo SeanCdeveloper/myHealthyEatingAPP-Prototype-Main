@@ -58,6 +58,12 @@
             background: linear-gradient(white, orange);
         }
 
+        body {
+            /*
+            background-image: url("");
+            */
+          /*  background: radial-gradient(orange, black);*/
+        }
 
         .myWorkoutWrap {
             margin: 0 10% 0 10%;
@@ -114,7 +120,7 @@
             <div class="col s12 m6">
               <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
-                  <p class="card-title">Recipe Title</p>
+                  <p class="card-title" id="recipeTitle">Recipe Title</p>
                   <p id="ingredients"></p>
                   <p id="steps"></p>
                 </div>
@@ -166,7 +172,8 @@
                     searchedId.unshift(recipeId);
                    // console.log(searchedId);
                     var responseName = response[i].title;
-                    var newDiv = $("<div class='foodItemDiv' data-id='" + recipeId + "'>" + "<span id='idDisp'>" + recipeId + "</span>" + "</div>");
+                    // data-name added 1/12/19 2:00 PM
+                    var newDiv = $("<div class='foodItemDiv' data-name='" + responseName + "' + data-id='" + recipeId + "'>" + "<span id='idDisp'>" + recipeId + "</span>" + "</div>");
                     var newP = $("<p>");
                     var hr = $("<hr>");
                     newP.text(responseName);
@@ -188,6 +195,7 @@
             console.log($(this).text());
             console.log($(this).attr("data-id"));
             var clickedId = $(this).attr("data-id");
+            $("#recipeTitle").text($(this).attr("data-name"));
             console.log(clickedId);
             AJAX2(clickedId);
             ingredientsAJAX(clickedId);
@@ -201,10 +209,10 @@
                 url: recipeUrl + "&apiKey=" + apiKey,
                 method: "GET"
             }).then(function (response) {
-                for (var i = 0; ; i++) {
+                console.log(response);
+                for (var i = 0; response[0].steps.length; i++) {
                     //console.log(response[0].steps[i]["step"]);
                     var steps = response[0].steps[i]["step"];
-                    console.log(steps);
                     $("#steps").append(`<div>`,`${steps} &nbsp;`);
                 }
             });
@@ -213,11 +221,12 @@
         function ingredientsAJAX(clickedId) {
             $("#ingredients").empty();
             var ingredientsUrl = "https://api.spoonacular.com/recipes/" + clickedId + "/ingredientWidget.json?";
-            var apiKey = "256cd3ee2e0548e59e4990ad44a8ec31";
+            var apiKey = "3ecef2433f5d402daccaccdf1550dabe";
             $.ajax({
                 url: ingredientsUrl + "&apiKey=" + apiKey,
                 method: "GET"
             }).then(function (response) {
+                console.log(response);
                 for (var i = 0; i < response.ingredients.length; i++) {
                     var results = response.ingredients[i];
                     console.log(results.amount.us.value);
